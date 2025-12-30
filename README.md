@@ -46,6 +46,7 @@ This is a fork of the **Free Range VHDL** open-source book. My goal is to provid
 
 > **Хочете допомогти?** Буду радий вашим Pull Request-ам! Дивіться вкладку [Issues], щоб дізнатися, що потрібно зробити або пропонуйте своє відкриваючи тікет.
 
+> **Хочете підтримати переклад?** Якщо бажаєте підтримати проект фінансово - запрошую до [монобанки](https://send.monobank.ua/jar/A36FKBheLR).
 ---
 
 # Free Range VHDL (Опис книги)
