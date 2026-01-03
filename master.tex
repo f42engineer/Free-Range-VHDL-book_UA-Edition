@@ -11,6 +11,11 @@
 \documentclass[11pt,b5paper]{book} % generate whole document in color
 \usepackage{style}
 
+% COMPILE BY CHAPTERS
+% Uncomment the following line and specify the chapter file names to compile only those chapters.
+% This is much faster for checking translations.
+% \includeonly{chapter1, chapter2}
+
 % Allow for the exercise solutions to not be listed in the ToC
 \newcommand{\stoptocwriting}{%
 	\addtocontents{toc}{\protect\setcounter{tocdepth}{-5}}}
@@ -98,6 +103,7 @@
 	\include{chapter11}
 	\include{chapter12}
 	\include{chapter13}
+	\include{chapter14} % Added chapter 14
     \begin{appendices}
 	    \include{appendix}
 	    \include{authors}

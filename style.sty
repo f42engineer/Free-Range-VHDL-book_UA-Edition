@@ -8,7 +8,6 @@
 %
 % NOTE: do not forget to install texlive-latex-extra (with, for instance Ubuntu Synaptic)
 
-\usepackage[australian]{babel}
 \usepackage{graphicx}
 \usepackage{framed}
 %\usepackage[width=13cm, left=2cm, top=2.5cm , bottom= 2cm ]{geometry} % A5 paper version
@@ -22,9 +21,20 @@
 %\SetWatermarkScale{5}
 %\SetWatermarkLightness{0.93}
 
-\usepackage[titletoc]{appendix}
+% \usepackage[titletoc]{appendix} % Moved to end
 \usepackage{boxedminipage}
-\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc} % Not needed for XeLaTeX
+
+% XeLaTeX Font and Language Setup
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{ukrainian}
+\setotherlanguage{english}
+
+% Font Configuration (Computer Modern Unicode)
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[absolute]{textpos}
@@ -121,7 +131,12 @@
 \definecolor{dark-green}{rgb}{0.245,0.121,0.0}
 
 \usepackage{upquote} % this fix listings accents and aphostrophies
-\usepackage{courier}
+% \usepackage{courier} % REMOVED: Incompatible with LuaLaTeX/fontspec
+
+% Explicit Cyrillic Font Families for Polyglossia
+\newfontfamily\cyrillicfont{CMU Serif}
+\newfontfamily\cyrillicfontsf{CMU Sans Serif}
+\newfontfamily\cyrillicfonttt{CMU Typewriter Text}
 
 \lstdefinelanguage{VHDL}{
   	morekeywords=[1]{
@@ -157,7 +172,7 @@
 	numbersep=5pt,
 	aboveskip={0pt},
 	tabsize=4,
-	extendedchars=true,
+	extendedchars=false,
 	breaklines=true,
 	classoffset=0,
     morecomment=[s][\textit]{my_lab}{el}, % make the label word italics
@@ -165,8 +180,8 @@
 	keywordstyle=\color{blue},
    	keywordstyle = [2]\color{STD}\bfseries,
 	commentstyle=\color[RGB]{10,140,20}, % green color
-	frame=b, % turn on end line
-	rulecolor=\color{dark-gray}, % end line color
+	frame=none, % turn off frame
+	%rulecolor=\color{dark-gray}, % end line color
 	%captionpos=b, 
 	belowcaptionskip=2pt,  
         stringstyle=\color{red}\ttfamily,
@@ -228,7 +243,27 @@
 \renewcommand{\tablename}{Tab.}
 
 % restyle chapter heading
+% restyle chapter heading
 \usepackage[Bjornstrup]{fncychap}
+\makeatletter
+\@ifundefined{HyperRaiseLinkLength}{%
+  \newlength{\HyperRaiseLinkLength}%
+  \setlength{\HyperRaiseLinkLength}{0pt}%
+}{}
+\makeatother
+% Override font for chapter number to support Cyrillic (Zapf Chancery doesn't support it)
+\ChNumVar{\fontsize{76}{80}\selectfont\itshape} % Use main font (CMU Serif) in Italic
+
+% Appendix configuration (Must be loaded AFTER fncychap)
+\usepackage[title]{appendix}
+\renewcommand{\appendixtocname}{Додаток}
+\renewcommand{\appendixpagename}{Додаток}
+\makeatletter
+\def\forcedAlph#1{\ifcase#1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\fi}
+\g@addto@macro\appendices{
+  \def\thechapter{\forcedAlph\c@chapter}
+}
+\makeatother
 
 % fix some Fancyhdr warnings
 \setlength{\headheight}{15pt}

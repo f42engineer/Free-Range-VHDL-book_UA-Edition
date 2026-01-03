@@ -1,8 +1,6 @@
 REM del *.pdf
-del ./*.aux ./*.toc ./*.log ./*.out ./*.dvi
-del ./*.synctex*
-del ./.*.xml ._* ./.DS_Store
-del ./*.tex~ ./*.sty~
-del -R ./__MACOSX
-REM del ./*~*
+del /f /q *.aux *.toc *.log *.out *.dvi *.bbl *.blg *.fls *.fdb_latexmk *.lof *.lot *.idx *.ind *.ilg
+del /f /q *.synctex*
+del /f /q .*.xml ._* .DS_Store
+del /f /q *.tex~ *.sty~
 
